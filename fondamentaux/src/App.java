@@ -1,6 +1,14 @@
 import java.util.Scanner;
 
 public class App {
+    /*
+     * 
+     * Exercice 1 : Saisir le rayon d'un cercle puis determine et affiche
+     *           1-Diametre  =rayon*2
+     *           2-Circonference ==rayon*2*PI
+     *           3-Surface =rayon*rayon*PI
+    
+     */
     public static void main(String[] args) throws Exception {
         //Type primitifs
          long nbre1;
