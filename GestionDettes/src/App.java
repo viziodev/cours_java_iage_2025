@@ -2,23 +2,31 @@ import java.util.Scanner;
 
 import entity.Client;
 import entity.Dette;
+import entity.Paiement;
 import services.ClientService;
+import services.DetteService;
 import vue.ClientVue;
 import vue.DetteVue;
+import vue.PaiementVue;
 
 public class App {
     private static Scanner scanner=new Scanner(System.in);
     public static void main(String[] args) throws Exception {
         ClientVue clientVue = new ClientVue();
         ClientService clientService = new ClientService();
+        DetteService detteService = new DetteService();
         DetteVue detteVue = new DetteVue();
+        PaiementVue paiementVue = new PaiementVue(); //
         int choix;
+        
     do {
          System.out.println("1-Ajouter  un client  dans un Tableau\n" + 
                             "2-Afficher les clients du Tableau\n" + 
                             "3-Ajouter une Dette à un client\n" + 
                             "4-Lister dettes d’un client\n" + 
-                            "6-Quitter\n" );
+                            "5-Ajouter un Paiement une Dette\n" + 
+                            "6-Lister les Payements d’une Dette d’un client\n" + 
+                            "7-Quitter\n" );
           choix=scanner.nextInt();
             switch (choix) {
                 case 1:
@@ -28,12 +36,10 @@ public class App {
                    boolean isCreated= clientService.addClient(client);
                     if (isCreated==true) {
                       System.out.println("Client ajoute dans le tableau");
-                    } else {
-                        System.out.println("Tableau est plein");
-                    }
+                    } 
                     break;
                  case 2:
-                   clientVue.showTabClient(clientService.getTabClients(),clientService.getNbreClient());
+                   clientVue.showTabClient(clientService.getTabClients());
                    break;
                 case 3:
                     scanner.nextLine();
@@ -55,13 +61,52 @@ public class App {
                     if (client==null) {
                           System.out.println("Ce numero ne correspond pas a un client");
                     }else{
-                         detteVue.showTabDette(client.getDettes(),client.getNbreDette());
+                         detteVue.showTabDette(client.getDettes());
                     }
                      break;
+
+                     case 5:
+                     scanner.nextLine();
+                      System.out.println("Entrer le Telephone");
+                      tel=scanner.nextLine();
+                      client= clientService.searchClientByTel(tel);
+                      if (client==null) {
+                           System.out.println("Ce numero ne correspond pas a un client");
+                      }else{
+                          System.out.println("Entrer le Numero de la Dette");
+                          String numero=scanner.nextLine();
+                          Dette dette= detteService.searchDetteByNumero(client.getDettes(),numero);
+                          if (dette!=null) {
+                               Paiement paiement=  paiementVue.scanPayement();
+                               dette.addPaiement(paiement);
+                          }else{
+                            System.out.println("Ce numero ne correspond pas a une Dette");
+                          }
+                      }
+                      break;
+
+                      case 6:
+                      scanner.nextLine();
+                      System.out.println("Entrer le Telephone");
+                      tel=scanner.nextLine();
+                      client= clientService.searchClientByTel(tel);
+                      if (client==null) {
+                           System.out.println("Ce numero ne correspond pas a un client");
+                      }else{
+                          System.out.println("Entrer le Numero de la Dette");
+                          String numero=scanner.nextLine();
+                          Dette dette= detteService.searchDetteByNumero(client.getDettes(),numero);
+                          if (dette!=null) {
+                              paiementVue.showListPaiement(dette.getPaiements());
+                          }else{
+                            System.out.println("Ce numero ne correspond pas a une Dette");
+                          }
+                      }
+                      break;
                 default:
                     
                     break;
             }
-     } while (choix!=6);
+     } while (choix!=7);
     }
 }

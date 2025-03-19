@@ -1,5 +1,6 @@
 package vue;
 
+import java.util.List;
 import java.util.Scanner;
 
 import entity.Client;
@@ -17,9 +18,9 @@ public class ClientVue {
         return client;
      }
 
-     public void showTabClient(Client[] clients,int nbreClient){
-       for (int index = 0; index < nbreClient; index++) {
-            System.out.println(clients[index].toString());
+     public void showTabClient(List<Client> clients){
+       for (int index = 0; index < clients.size(); index++) {
+            System.out.println(clients.get(index).toString());
        }
      }
 }

@@ -1,29 +1,27 @@
 package entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Client {
      private String nom;
      private String telephone; 
      private String adresse;
      private double montantDu=0;
     //Un client peu avoir plusieurs dettes
-     private final int N=10;
-     private Dette[] dettes=new Dette[N];
-     private int nbreDette=0;
-     public Dette[] getDettes() {
+
+     private List<Dette> dettes=new ArrayList<>();
+   
+     public List<Dette> getDettes() {
         return dettes;
     }
-     public int getNbreDette() {
-        return nbreDette;
-     }
+     
      //add Dette to Client
      public boolean addDette(Dette dette) {
-        if (nbreDette<N-1) {
-            dettes[nbreDette]=dette; 
-            nbreDette++;
+            dettes.add(dette);
             montantDu=montantDu+dette.getMontantDette();
             return true;  
-         }
-        return false;
+       
     }
 
 
@@ -62,10 +60,7 @@ public class Client {
                 + "\nMontant Du: " + montantDu ;
     }
 
-    public int getN() {
-        return N;
-    }
-
+   
     
 
 }

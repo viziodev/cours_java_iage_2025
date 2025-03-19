@@ -1,5 +1,6 @@
 package vue;
 
+import java.util.List;
 import java.util.Scanner;
 import entity.Dette;
 
@@ -7,6 +8,8 @@ public class DetteVue {
      private Scanner scanner=new Scanner(System.in);
      public Dette scanDette(){
         Dette dette=new Dette();
+        System.out.println("Entrer le numero  de la Dette");
+        dette.setNumero(scanner.nextLine());
         System.out.println("Entrer la Date de la Dette");
         dette.setDate(scanner.nextLine());
         System.out.println("Entrer le Montant de la Dette");
@@ -16,9 +19,9 @@ public class DetteVue {
         return dette;
      }
 
-     public void showTabDette(Dette[] dettes,int nbreDette){
-        for (int index = 0; index < nbreDette; index++) {
-             System.out.println(dettes[index].toString());
+     public void showTabDette(List<Dette>dettes){
+        for (int index = 0; index < dettes.size(); index++) {
+             System.out.println(dettes.get(index).toString());
         }
       }
 }

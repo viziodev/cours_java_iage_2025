@@ -1,10 +1,27 @@
 package entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Dette {
+    private String numero;
     private String date;
     private double montantDette,montantPaye,montantRestant;
+    private List<Paiement> paiements=new ArrayList<>();
+
+    public List<Paiement> getPaiements() {
+        return paiements;
+    }
+   public void addPaiement(Paiement paiement){
+         paiements.add(paiement);
+         montantPaye+=paiement.getMontant();
+         montantRestant-=paiement.getMontant();
+   }
+   
     public Dette() {
    }
+
+   
 public String getDate() {
     return date;
 }
@@ -34,6 +51,13 @@ public String toString() {
     return "Dette [date=" + date + ", montantDette=" + montantDette + ", montantPaye=" + montantPaye
             + ", montantRestant=" + montantRestant + "]";
 }
+public String getNumero() {
+    return numero;
+}
+public void setNumero(String numero) {
+    this.numero = numero;
+}
+
 
 
    
