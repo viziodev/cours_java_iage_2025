@@ -12,15 +12,25 @@ public class Compte {
        private LocalDate  dateCreation;
        private double montant;
        private ArrayList<Transaction> transactions=new ArrayList<>();
+       protected TypeCompte type;
 
-      //Attributs Static 
+       
+
+      public TypeCompte getType() {
+        return type;
+      }
+
+    public void setType(TypeCompte type) {
+        this.type = type;
+    }
+    //Attributs Static 
        private static int nbreCompte=0;
 
 
     public ArrayList<Transaction> getTransactions() {
         return transactions;
     }
-     public boolean addTransactions(Transaction transaction) {
+    /* public boolean addTransactions(Transaction transaction) {
          if (transaction.getType()==TypeTransaction.Retrait) {
             if (montant>=transaction.getMontant()) {
                  transactions.add(transaction);
@@ -34,6 +44,24 @@ public class Compte {
          montant=montant+transaction.getMontant();
          return true;
      }
+ */
+
+ public boolean depot(Transaction transaction) {
+    transactions.add(transaction);
+    montant=montant+transaction.getMontant();
+    return true;
+  }
+
+  public boolean retrait(Transaction transaction) {
+        if (montant>=transaction.getMontant()) {
+             transactions.add(transaction);
+             montant=montant-transaction.getMontant();
+            return true;
+        }
+        return false;
+  }
+
+
 
      public static int getNbreCompte() {
         return nbreCompte;

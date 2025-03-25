@@ -2,22 +2,11 @@ package views;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import entity.Transaction;
 import entity.TypeTransaction;
-
-public class TransactionVue {
-      private Scanner scanner=new Scanner(System.in);
-    private double saisieDouble(String message){
-        double nbre;
-        do {
-            System.out.println(message);
-            nbre=scanner.nextDouble(); 
-        } while (nbre<=0);
-
-          return nbre;
-     }
+//Sous-classe (Classe enfant) → La classe qui hérite de la superclasse et peut ajouter ou modifier des fonctionnalités.
+public class TransactionVue  extends Vue{
     public Transaction saisie(){
       Transaction transaction = new Transaction();
         //1-Numero d'un compte est unique

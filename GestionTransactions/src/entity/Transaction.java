@@ -8,9 +8,6 @@ public class Transaction {
        private double montant;
        private TypeTransaction type;
        private static int nbreTransactions=0;
-
-
-       
       public Transaction(double montant, TypeTransaction type) {
         nbreTransactions++;
         id=nbreTransactions; 

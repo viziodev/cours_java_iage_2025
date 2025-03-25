@@ -2,13 +2,14 @@ package views;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Scanner;
+
 
 import entity.Compte;
 import services.CompteService;
-
-public class CompteVue {
-    private Scanner scanner=new Scanner(System.in);
+//Sous-classe (Classe enfant) → La classe qui hérite de la superclasse et peut ajouter ou modifier des fonctionnalités.
+public class CompteVue extends Vue {
+  //Membres Partages
+  
     //Injection de Dependance
      private CompteService compteService;
      public CompteVue(CompteService compteService) {
@@ -34,15 +35,7 @@ public class CompteVue {
           return nbre;
      }
 
-     private double saisieDouble(String message){
-        double nbre;
-        do {
-            System.out.println(message);
-            nbre=scanner.nextDouble(); 
-        } while (nbre<=0);
-
-          return nbre;
-     }
+    
     public Compte saisie(){
       Compte compte = new Compte();
         //1-Numero d'un compte est unique

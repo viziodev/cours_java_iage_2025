@@ -25,7 +25,7 @@ public class App {
                   Compte compte=compteVue.saisie(); 
                   compteService.addCompte(compte);
                   Transaction trans=new Transaction(compte.getMontant(),TypeTransaction.Depot);
-                  compte.addTransactions(trans);
+                  compte.depot(trans);
                     break;
                   case 2:
                     System.out.println("Le nombre de comptes crees est "+Compte.getNbreCompte());
@@ -38,11 +38,17 @@ public class App {
                     System.out.println("Aucun compte ne correspond a ce numero");
                  }else{
                     Transaction transaction=transactionVue.saisie();
-                    if(compte.addTransactions(transaction)){
-                        System.out.println("Transaction effectuee");
+                    if (transaction.getType()==TypeTransaction.Depot) {
+                        compte.depot(transaction);
+                        System.out.println("Depot  effectuee avec succes");
                     }else{
-                        System.out.println("Solde insuffisant pour faire la transaction");
+                      if(compte.retrait(transaction)){
+                           System.out.println("Retrait  effectuee avec succes");
+                       }else{
+                         System.out.println("Solde insuffisant pour faire la transaction");
+                       }
                     }
+                    
                  }
                 break;
                 case 4:
