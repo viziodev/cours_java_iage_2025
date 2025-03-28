@@ -2,19 +2,16 @@ package entity;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-
 import services.FormatDateService;
 
 public class Compte {
     //Attributs Instances
-       private int id;
-       private String numero;
-       private LocalDate  dateCreation;
-       private double montant;
-       private ArrayList<Transaction> transactions=new ArrayList<>();
+       protected int id;
+       protected String numero;
+       protected LocalDate  dateCreation;
+       protected double montant;
+       protected ArrayList<Transaction> transactions=new ArrayList<>();
        protected TypeCompte type;
-
-       
 
       public TypeCompte getType() {
         return type;
@@ -30,21 +27,6 @@ public class Compte {
     public ArrayList<Transaction> getTransactions() {
         return transactions;
     }
-    /* public boolean addTransactions(Transaction transaction) {
-         if (transaction.getType()==TypeTransaction.Retrait) {
-            if (montant>=transaction.getMontant()) {
-                 transactions.add(transaction);
-                 montant=montant-transaction.getMontant();
-                return true;
-            }
-            return false;
-         } 
-         //Depot
-         transactions.add(transaction);
-         montant=montant+transaction.getMontant();
-         return true;
-     }
- */
 
  public boolean depot(Transaction transaction) {
     transactions.add(transaction);
@@ -93,7 +75,7 @@ public void setMontant(double montant) {
 }
 @Override
 public String toString() {
-    return "Compte [id=" + id + ", numero=" + numero + ", dateCreation=" + FormatDateService.toFr(dateCreation) + ", montant=" + montant + "]";
+    return "Compte [id=" + id + ", numero=" + numero + ", dateCreation=" + FormatDateService.toFr(dateCreation) + ", montant=" + montant + ", Type=" + type + "]";
 }
 @Override
 public int hashCode() {

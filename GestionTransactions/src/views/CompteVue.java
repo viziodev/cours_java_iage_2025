@@ -3,8 +3,9 @@ package views;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-
+import entity.Cheque;
 import entity.Compte;
+import entity.Epargne;
 import services.CompteService;
 //Sous-classe (Classe enfant) → La classe qui hérite de la superclasse et peut ajouter ou modifier des fonctionnalités.
 public class CompteVue extends Vue {
@@ -37,15 +38,35 @@ public class CompteVue extends Vue {
 
     
     public Compte saisie(){
-      Compte compte = new Compte();
+        Compte compte ;
         //1-Numero d'un compte est unique
         String numero;
+        double montant;
+        int typeCompte;
+        int dureeBlocage;
        do {
          numero=saisieChaine("Entrer le numero du compte");
        } while (compteService.searchCompteByNumero(numero)!=null);
-        compte.setNumero(numero);
+        montant=saisieDouble("Entrer le solde");
+         do {
+            System.out.println("1-Compte Epargne"); 
+            System.out.println("2-Compte Cheque"); 
+            System.out.println("Veuillez choisir un type de compte");
+            typeCompte=scanner.nextInt();
+         } while (typeCompte!=1 && typeCompte!=2);
+         if (typeCompte==1) {
+             compte=new Epargne(); //Epargne vers Compte
+             dureeBlocage= saisieEntier("Entrer la duree de blocage du compte");
+             //((Epargne)compte)  ==> Compte  vers Epargne
+            ((Epargne)compte).setDureeBlocage(dureeBlocage);
+             
+         }else{
+             compte=new Cheque();
+         }
         compte.setDateCreation(LocalDate.now()); 
-        compte.setMontant(saisieDouble("Entrer le solde")); 
+        compte.setNumero(numero);
+     
+        compte.setMontant(montant);
         return compte;
     }
 

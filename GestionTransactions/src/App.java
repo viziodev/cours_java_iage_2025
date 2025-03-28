@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 import entity.Compte;
 import entity.Transaction;
+import entity.TypeCompte;
 import entity.TypeTransaction;
 import services.CompteService;
 import views.CompteVue;
@@ -22,10 +23,11 @@ public class App {
              choix= menu();
              switch (choix) {
                 case 1:
-                  Compte compte=compteVue.saisie(); 
+                  Compte compte=compteVue.saisie();
                   compteService.addCompte(compte);
-                  Transaction trans=new Transaction(compte.getMontant(),TypeTransaction.Depot);
-                  compte.depot(trans);
+                   Transaction trans=new Transaction(compte.getMontant(),TypeTransaction.Depot);
+                   compte.depot(trans);
+                   compte.setMontant(trans.getMontant());
                     break;
                   case 2:
                     System.out.println("Le nombre de comptes crees est "+Compte.getNbreCompte());
